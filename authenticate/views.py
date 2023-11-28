@@ -17,6 +17,7 @@ import jwt
 
 
 class RegisterAPIView(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = RegisterSerializer
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
