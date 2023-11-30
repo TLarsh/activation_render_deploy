@@ -112,6 +112,9 @@ class ViewUsersAPIView(generics.ListAPIView):
 
 
 class UserProfileUpdateAPIView(generics.UpdateAPIView):
+    queryset = User.objects.all()
     serializer_class = UserProfileUpdateSerializer
     permission_classes = (permissions.AllowAny,)
     
+    def get_object(self):
+        return self.request.user
