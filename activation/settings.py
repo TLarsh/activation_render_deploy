@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'transaction',
     'rest_framework',
     'drf_yasg',
+    'corsheaders'
 ]
 
 SWAGGER_SETTINGS = {
@@ -83,6 +84,7 @@ JWT_AUTH = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -91,6 +93,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ORIGINS = ['*']
+
 
 ROOT_URLCONF = 'activation.urls'
 
@@ -125,7 +131,7 @@ DATABASES = {
 DATABASES = {
     'default': dj_database_url.parse("postgres://signup_otp_user:IjkJKxbwlvA1ETdkz2zbTn5VCqTtVSEU@dpg-cli7nhfjc5ks73eqpbrg-a.oregon-postgres.render.com/signup_otp")
     }
-# 
+
 
 
 
@@ -166,7 +172,7 @@ USE_TZ = True
 # STATIC_ROOT = BASE_DIR / 'static/'
 # MEDIA_ROOT = BASE_DIR / 'media/'
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
