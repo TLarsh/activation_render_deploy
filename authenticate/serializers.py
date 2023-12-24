@@ -85,8 +85,8 @@ class SetNewPasswordSerializer(serializers.ModelSerializer):
                 id = force_str(urlsafe_base64_decode
                                (uidb64))
                 user = User.objects.get(id=id)
-                print(password)
-                print (user)
+                # print(password)
+                # print (user)
                 if not PasswordResetTokenGenerator.check_token(user, token):
                     raise AuthenticationFailed('The reset link is invalid', 401)
                 

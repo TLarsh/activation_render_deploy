@@ -95,7 +95,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ORIGINS = ['*']
+CORS_ALLOW_ORIGINS = ['http:localhost:3000']
 
 
 ROOT_URLCONF = 'activation.urls'

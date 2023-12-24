@@ -42,6 +42,7 @@ class EmailVerifyAPIView(generics.GenericAPIView):
     )
     @swagger_auto_schema(manual_parameters=[token_param_config])    
     def get(self, request):
+        permission_classes = (permissions.Allowany,)
         serializer = self.serializer_class(data=request.data)
         token = request.GET.get('token')
         try:
@@ -67,6 +68,7 @@ class LoginAPIView(generics.GenericAPIView):
     
     
 class RequestEmailPasswordResetAPIView(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = RequestEmailPasswordResetSerializer
     def post(self, request):
         email = request.data['email']
@@ -84,6 +86,7 @@ class RequestEmailPasswordResetAPIView(generics.GenericAPIView):
     
     
 class CheckPasswordTokenAPIView(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request, uidb64, token):
         try:
             id =smart_str(urlsafe_base64_decode(uidb64))
@@ -98,6 +101,7 @@ class CheckPasswordTokenAPIView(generics.GenericAPIView):
 
 
 class SetNewPasswordAPIView(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = SetNewPasswordSerializer
     def patch(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, context={"kwargs":kwargs})
@@ -106,12 +110,14 @@ class SetNewPasswordAPIView(generics.GenericAPIView):
 
         
 class ViewUsersAPIView(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
 
 
 class UserProfileUpdateAPIView(generics.UpdateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserProfileUpdateSerializer
     permission_classes = (permissions.AllowAny,)
